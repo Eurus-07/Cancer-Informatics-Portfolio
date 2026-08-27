@@ -16,5 +16,16 @@ __pycache__/
 # Large/raw datasets
 01_TCGA_BRCA/data/*
 
-# Keep the data directory itself in Git
+# Keep processed datasets in Git
+!01_TCGA_BRCA/data/processed/
+!01_TCGA_BRCA/data/processed/**
+
+# Keep the data directory placeholder
 !01_TCGA_BRCA/data/.gitkeep
+
+# Local VS Code settings
+.vscode/
+
+# Large downloaded archive
+01_TCGA_BRCA/brca_tcga_pan_can_atlas_2018.tar.gz
+
