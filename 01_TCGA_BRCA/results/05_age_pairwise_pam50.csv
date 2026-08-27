@@ -1,0 +1,11 @@
+subtype_1,subtype_2,U_statistic,p_value,p_adjusted,significant
+Luminal A,Luminal B,49268.0,0.5230843846425067,1.0,False
+Luminal A,Basal-like,49444.0,0.0004464859471800385,0.004464859471800385,True
+Luminal A,HER2-enriched,19425.5,0.4251472979681825,1.0,False
+Luminal A,Normal-like,10497.5,0.05673774368218111,0.5673774368218111,False
+Luminal B,Basal-like,19336.0,0.008363782155883643,0.08363782155883642,False
+Luminal B,HER2-enriched,7554.5,0.6743256022797308,1.0,False
+Luminal B,Normal-like,4094.5,0.11291512738951467,1.0,False
+Basal-like,HER2-enriched,5538.0,0.0889274024024811,0.889274024024811,False
+Basal-like,Normal-like,3086.0,0.9816822146334307,1.0,False
+HER2-enriched,Normal-like,1538.0,0.23754648861454442,1.0,False

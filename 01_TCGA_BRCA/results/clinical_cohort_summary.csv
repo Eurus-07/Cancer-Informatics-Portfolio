@@ -1,0 +1,14 @@
+Characteristic,Value
+Total patients,1098.0
+"Age at diagnosis, median (years)",59.0
+Stage I,183.0
+Stage II,621.0
+Stage III,249.0
+Stage IV,20.0
+Ductal carcinoma,778.0
+Lobular carcinoma,201.0
+Mixed ductal/lobular carcinoma,28.0
+Other histological types,90.0
+Alive,945.0
+Dead,152.0
+Patients usable for survival analysis,1094.0
