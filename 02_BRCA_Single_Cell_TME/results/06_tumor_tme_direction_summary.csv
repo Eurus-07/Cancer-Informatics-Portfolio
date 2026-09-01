@@ -1,0 +1,8 @@
+source,target,n_interactions
+Cancer Epithelial,Myeloid,2
+Cancer Epithelial,T-cells,2
+CAFs,Cancer Epithelial,1
+Cancer Epithelial,CAFs,1
+Cancer Epithelial,Endothelial,1
+Cancer Epithelial,PVL,1
+Endothelial,Cancer Epithelial,1

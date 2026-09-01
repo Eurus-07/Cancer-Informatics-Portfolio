@@ -1,0 +1,10 @@
+source,target,ligand_complex,receptor_complex,magnitude_rank,specificity_rank,interaction,direction
+CAFs,Cancer Epithelial,LUM,ITGB1,1.1017058736419318e-05,0.017688151342452645,LUM → ITGB1,CAFs → Cancer Epithelial
+Cancer Epithelial,T-cells,CD59,CD2,0.0005374440564114868,0.01141598632682796,CD59 → CD2,Cancer Epithelial → T-cells
+Cancer Epithelial,PVL,MDK,SDC2,0.009703023613128534,0.017688151342452645,MDK → SDC2,Cancer Epithelial → PVL
+Cancer Epithelial,CAFs,MDK,LRP1,0.01547398589993874,0.007769498771964479,MDK → LRP1,Cancer Epithelial → CAFs
+Cancer Epithelial,Myeloid,COPA,CD74,0.023510034257937726,0.03533999144173793,COPA → CD74,Cancer Epithelial → Myeloid
+Cancer Epithelial,Endothelial,MDK,ITGA6_ITGB1,0.024502359930722854,0.010560560360677661,MDK → ITGA6_ITGB1,Cancer Epithelial → Endothelial
+Cancer Epithelial,Myeloid,S100A8,CD68,0.0314306679429728,0.00018307598691272138,S100A8 → CD68,Cancer Epithelial → Myeloid
+Endothelial,Cancer Epithelial,VWF,ITGB1,0.04636376780717,0.017688151342452645,VWF → ITGB1,Endothelial → Cancer Epithelial
+Cancer Epithelial,T-cells,S100A8,CD69,0.04911816572209242,0.0016355317709524687,S100A8 → CD69,Cancer Epithelial → T-cells
