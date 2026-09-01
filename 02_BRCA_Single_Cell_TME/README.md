@@ -149,3 +149,109 @@ These results suggest that the malignant compartment displays continuous functio
 │   └── 05_tumor_epithelial_heterogeneity.ipynb
 ├── results/
 └── README.md
+---
+
+### 06 — Cell–Cell Communication
+
+Potential ligand–receptor interactions among major tumor microenvironment
+compartments were explored using LIANA.
+
+The analysis included:
+
+- Cancer epithelial cells
+- CAFs
+- Perivascular-like cells
+- Endothelial cells
+- Myeloid cells
+- T cells
+- B cells
+- Plasmablasts
+
+Normal epithelial cells were excluded from the main communication analysis
+because of their small cell number.
+
+A total of 615 tumor-centered ligand–receptor interactions were identified.
+After excluding tumor self-signaling and applying exploratory consensus-ranking
+thresholds, 9 high-ranking tumor–TME candidate interactions were retained.
+
+Two recurrent communication patterns emerged.
+
+#### Stromal/endothelial → tumor signaling
+
+Multiple stromal and endothelial ligands converged on ITGB1-containing
+receptors in cancer epithelial cells.
+
+Notable candidate interactions included:
+
+- CAFs → Cancer Epithelial: LUM → ITGB1
+- Endothelial → Cancer Epithelial: VWF → ITGB1
+
+Additional ITGB1-associated candidate ligands included LGALS1, HSPG2, VCAN,
+LGALS3BP, CLEC11A, SPON2, FBLN1, TGM2, LAMA4, and LAMC1.
+
+#### Tumor → stromal signaling
+
+MDK emerged as a recurrent candidate tumor-derived ligand targeting several
+stromal compartments:
+
+- Cancer Epithelial → PVL: MDK → SDC2
+- Cancer Epithelial → CAFs: MDK → LRP1
+- Cancer Epithelial → Endothelial: MDK → ITGA6_ITGB1
+
+Additional candidate tumor–immune interactions included:
+
+- CD59 → CD2
+- COPA → CD74
+- S100A8 → CD68
+- S100A8 → CD69
+
+Because this analysis is based on ligand–receptor expression inference from a
+single tumor sample, these interactions are interpreted as candidate
+communication events rather than experimentally validated signaling activity.
+
+---
+
+### 07 — Myeloid Trajectory and Diffusion Pseudotime
+
+The myeloid compartment was further investigated to assess transcriptional
+continuity between monocyte- and macrophage-associated states.
+
+The original myeloid compartment contained 178 cells:
+
+- Macrophage: 109
+- Monocyte: 36
+- Cycling myeloid: 21
+- Dendritic cells: 12
+
+For trajectory analysis, monocytes and macrophages were analysed separately,
+resulting in a 145-cell monocyte–macrophage compartment.
+
+Diffusion-map analysis suggested a continuous rather than sharply separated
+monocyte–macrophage transcriptional landscape.
+
+A biologically informed pseudotime root was selected from the
+IL1B-associated monocyte population using high monocyte-program and low
+macrophage-program activity.
+
+Subset pseudotime ordering showed an overall progression from:
+
+- S100A9-associated monocytes
+- IL1B-associated monocytes
+- LAM1/FABP5 macrophages
+- CXCL10-associated macrophages
+- EGR1-associated macrophages
+
+Macrophage-associated transcriptional activity showed a weak but statistically
+significant positive correlation with pseudotime:
+
+- Spearman rho = 0.178
+- p = 0.0323
+
+The monocyte-associated programme showed a non-significant decreasing trend:
+
+- Spearman rho = -0.102
+- p = 0.2205
+
+These results support an exploratory monocyte-to-macrophage transcriptional
+continuum, but do not constitute direct evidence of temporal differentiation
+or lineage fate.
