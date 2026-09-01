@@ -1,35 +1,151 @@
-# Project 02 — Single-Cell Analysis of the Breast Cancer Tumour Microenvironment
+# Project 02 — Single-Cell Analysis of the Breast Cancer Tumor Microenvironment
 
-## Research Question
+## Overview
 
-What cellular populations and transcriptional states define the breast cancer tumour microenvironment at single-cell resolution?
+This project investigates the cellular composition and transcriptional heterogeneity of the tumor microenvironment in a triple-negative breast cancer (TNBC) sample using single-cell RNA sequencing.
+
+The analysis focuses on the CID4465 breast cancer sample and applies a Scanpy-based workflow to characterize major tumor microenvironment compartments, including immune, stromal, endothelial, and malignant epithelial populations.
 
 ## Dataset
 
-GSE176078 — A single-cell and spatially resolved atlas of human breast cancers.
+- Sample: CID4465
+- Cancer subtype: Triple-negative breast cancer (TNBC)
+- Data type: Single-cell RNA sequencing
+- Initial cells: 1,564
+- Cells retained after QC: 1,534
+- Genes retained after filtering: 13,514
 
-The dataset contains single-cell RNA-seq profiles from primary breast tumours spanning major clinical subtypes, including ER-positive, HER2-positive and triple-negative breast cancer.
+## Analysis Workflow
 
-## Planned Analysis
+### 01 — Data Loading and Quality Control
 
-1. Data loading and quality control
-2. Cell- and gene-level filtering
-3. Normalisation and highly variable gene selection
-4. PCA and neighbourhood graph construction
-5. UMAP dimensionality reduction
-6. Leiden clustering
-7. Cluster marker gene identification
-8. Cell-type annotation
-9. Tumour microenvironment composition analysis
-10. Comparison of immune, stromal and malignant cell states
+The raw single-cell expression matrix and metadata were imported into an AnnData object.
 
-## Main Tools
+Quality-control metrics included:
 
-- Python
-- Scanpy
-- AnnData
-- pandas
-- NumPy
-- matplotlib
-- scikit-learn
-- Git and GitHub
+- Number of detected genes per cell
+- Total transcript counts
+- Mitochondrial transcript percentage
+
+QC filtering retained 1,534 of 1,564 cells.
+
+Highly variable genes were identified, followed by PCA, neighborhood graph construction, Leiden clustering, and UMAP visualization.
+
+---
+
+### 02 — Cell-Type Validation
+
+Original metadata annotations were examined and compared with transcriptional clusters.
+
+Major cellular compartments included:
+
+- Cancer epithelial cells
+- T cells
+- B cells
+- Plasmablasts
+- Myeloid cells
+- Cancer-associated fibroblasts
+- Perivascular-like cells
+- Endothelial cells
+- Normal epithelial cells
+
+Cluster-specific marker genes were used to assess biological consistency of the supplied cell-type annotations.
+
+---
+
+### 03 — Immune Microenvironment
+
+The immune compartment was examined in greater detail.
+
+Major immune populations included:
+
+- CD4+ T cells
+- CD8+ T cells
+- Regulatory T cells
+- NKT and NK cells
+- Monocytes
+- Macrophages
+- Dendritic cells
+- B cells
+- Plasmablasts
+
+Immune transcriptional programmes were evaluated to explore heterogeneity within lymphoid and myeloid populations.
+
+---
+
+### 04 — Stromal Microenvironment
+
+The stromal compartment was analysed separately.
+
+Major stromal populations included:
+
+- myCAF-like cancer-associated fibroblasts
+- MSC/iCAF-like fibroblasts
+- Perivascular-like cells
+- Endothelial populations
+
+The analysis examined stromal-state composition and transcriptional diversity within the TNBC tumor microenvironment.
+
+---
+
+### 05 — Tumor and Epithelial Heterogeneity
+
+Cancer epithelial cells were isolated for tumor-only re-clustering.
+
+A total of 113 cancer epithelial cells were analysed.
+
+Original tumor annotations included:
+
+- Cancer Cycling: 89 cells
+- Cancer Basal SC: 19 cells
+- Cancer LumB SC: 5 cells
+
+Tumor-specific highly variable genes were selected and used for PCA, neighborhood graph construction, UMAP, and Leiden clustering.
+
+At Leiden resolution 0.5, three exploratory transcriptional states were identified:
+
+- Intermediate epithelial: 40 cells
+- Stress-responsive epithelial: 31 cells
+- Proliferative: 42 cells
+
+No individual cluster-marker genes remained statistically significant after multiple-testing correction.
+
+Gene-program analysis showed a significant difference in proliferation activity across the three tumor states:
+
+- Kruskal-Wallis H = 6.559
+- p = 0.0376
+
+Basal, epithelial, and stress-associated programme scores were not significantly different across clusters.
+
+These results suggest that the malignant compartment displays continuous functional heterogeneity rather than strongly separated tumor subtypes.
+
+## Key Findings
+
+1. The CID4465 TNBC microenvironment contains substantial immune, stromal, endothelial, and malignant epithelial diversity.
+
+2. Stromal cells constitute a major component of the tumor microenvironment, particularly CAF and perivascular populations.
+
+3. Immune populations include heterogeneous lymphoid and myeloid subsets.
+
+4. Tumor-only analysis identified three exploratory transcriptional states.
+
+5. Proliferation was the clearest transcriptional programme distinguishing tumor-cell states.
+
+6. Limited differential-expression significance within the malignant compartment highlights the importance of cautious interpretation when analysing small single-cell populations.
+
+## Repository Structure
+
+```text
+02_BRCA_Single_Cell_TME/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── figures/
+├── notebooks/
+│   ├── 01_data_loading_and_qc.ipynb
+│   ├── 02_cell_type_validation.ipynb
+│   ├── 03_immune_microenvironment.ipynb
+│   ├── 04_stromal_microenvironment.ipynb
+│   └── 05_tumor_epithelial_heterogeneity.ipynb
+├── results/
+└── README.md
