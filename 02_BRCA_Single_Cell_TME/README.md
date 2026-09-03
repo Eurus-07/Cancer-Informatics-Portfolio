@@ -119,37 +119,6 @@ Basal, epithelial, and stress-associated programme scores were not significantly
 
 These results suggest that the malignant compartment displays continuous functional heterogeneity rather than strongly separated tumor subtypes.
 
-## Key Findings
-
-1. The CID4465 TNBC microenvironment contains substantial immune, stromal, endothelial, and malignant epithelial diversity.
-
-2. Stromal cells constitute a major component of the tumor microenvironment, particularly CAF and perivascular populations.
-
-3. Immune populations include heterogeneous lymphoid and myeloid subsets.
-
-4. Tumor-only analysis identified three exploratory transcriptional states.
-
-5. Proliferation was the clearest transcriptional programme distinguishing tumor-cell states.
-
-6. Limited differential-expression significance within the malignant compartment highlights the importance of cautious interpretation when analysing small single-cell populations.
-
-## Repository Structure
-
-```text
-02_BRCA_Single_Cell_TME/
-├── data/
-│   ├── raw/
-│   └── processed/
-├── figures/
-├── notebooks/
-│   ├── 01_data_loading_and_qc.ipynb
-│   ├── 02_cell_type_validation.ipynb
-│   ├── 03_immune_microenvironment.ipynb
-│   ├── 04_stromal_microenvironment.ipynb
-│   └── 05_tumor_epithelial_heterogeneity.ipynb
-├── results/
-└── README.md
----
 
 ### 06 — Cell–Cell Communication
 
@@ -255,3 +224,95 @@ The monocyte-associated programme showed a non-significant decreasing trend:
 These results support an exploratory monocyte-to-macrophage transcriptional
 continuum, but do not constitute direct evidence of temporal differentiation
 or lineage fate.
+---
+
+### 08 — Computational Method Benchmarking
+
+Clustering strategies were benchmarked to evaluate how algorithmic choice affects recovery of biologically annotated cell populations in TNBC single-cell RNA-seq data.
+
+A common computational representation was constructed using:
+
+- 1,534 cells
+- 2,000 highly variable genes
+- Scaled gene expression
+- 50 principal components
+
+Two clustering strategies were compared using the same PCA representation:
+
+- K-means clustering (k = 9)
+- Leiden graph-based clustering (resolution = 0.5)
+
+Performance was evaluated using Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), cluster purity, silhouette score, cluster composition, and parameter sensitivity.
+
+#### Quantitative benchmarking
+
+K-means produced nine clusters:
+
+- ARI = 0.772
+- NMI = 0.866
+- Purity = 0.953
+- Silhouette = 0.074
+
+Leiden produced seven clusters:
+
+- ARI = 0.909
+- NMI = 0.890
+- Purity = 0.930
+- Silhouette = 0.072
+
+Leiden therefore showed substantially stronger overall agreement with the biological cell-type annotations despite producing fewer clusters.
+
+K-means achieved slightly higher cluster purity, but cluster-composition analysis showed that several biological populations, particularly CAFs and perivascular-like cells, were split across multiple K-means clusters. This demonstrates why cluster purity alone can be misleading when evaluating clustering performance.
+
+Leiden more consistently recovered major CAF, perivascular, endothelial, myeloid, and cancer epithelial populations, although some closely related lymphoid populations were merged.
+
+#### Leiden resolution sensitivity
+
+Leiden resolution was systematically evaluated from 0.2 to 1.0 while keeping the underlying nearest-neighbour graph fixed.
+
+Resolutions 0.3–0.5 produced the same stable seven-cluster solution and achieved the strongest agreement with biological annotations:
+
+- ARI = 0.909
+- NMI = 0.890
+
+Increasing the resolution to 0.6–1.0 generated eight to nine clusters but reduced ARI and NMI, indicating that increased clustering granularity did not improve biological recovery.
+
+Overall, this benchmarking analysis demonstrates that clustering methods should be evaluated using multiple complementary metrics rather than cluster number or visual separation alone. In this dataset, graph-based Leiden clustering provided stronger correspondence with biological cell identities than centroid-based K-means clustering.
+
+## Key Findings
+
+1. The CID4465 TNBC microenvironment contains substantial immune, stromal, endothelial, and malignant epithelial heterogeneity.
+
+2. Stromal populations, particularly CAFs and perivascular-like cells, represent major components of the tumor microenvironment.
+
+3. Tumor epithelial cells display continuous functional heterogeneity, with proliferation representing the clearest programme distinguishing exploratory tumor-cell states.
+
+4. Cell–cell communication analysis identified candidate stromal–tumor signaling patterns, including recurrent ITGB1-associated interactions and tumor-derived MDK signaling.
+
+5. Myeloid trajectory analysis supported an exploratory monocyte-to-macrophage transcriptional continuum, while emphasizing that pseudotime does not directly establish temporal differentiation or lineage fate.
+
+6. Computational benchmarking showed that graph-based Leiden clustering recovered biological cell identities more consistently than K-means clustering (ARI 0.909 vs 0.772), despite K-means achieving slightly higher cluster purity.
+
+7. Leiden resolution sensitivity analysis identified a stable solution across resolutions 0.3–0.5, demonstrating that increased cluster granularity does not necessarily improve biological recovery.
+
+8. Together, these analyses illustrate the importance of combining biological interpretation with quantitative evaluation of computational methods in single-cell cancer genomics.
+
+## Repository Structure
+
+```text
+02_BRCA_Single_Cell_TME/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── figures/
+├── notebooks/
+│   ├── 01_data_loading_and_qc.ipynb
+│   ├── 02_cell_type_validation.ipynb
+│   ├── 03_immune_microenvironment.ipynb
+│   ├── 04_stromal_microenvironment.ipynb
+│   ├── 05_tumor_epithelial_heterogeneity.ipynb
+│   ├── 06_cell_cell_communication.ipynb
+│   ├── 07_myeloid_trajectory.ipynb
+│   └── 08_computational_method_comparison.ipynb
+├── results/
+└── README.md
